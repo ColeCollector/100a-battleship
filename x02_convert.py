@@ -9,8 +9,35 @@ def convert(coordinate):
     examples: "B 3" "B3" "b3"
   return value: list containing 2 integers
   """
-  pass
-  return None
+
+  lowercase = ["a","b","c","d","e","f","g","h","i","j"]
+  uppercase = ["A","B","C","D","E","F","G","H","I","J","K"]
+  if coordinate[0] in lowercase:
+    if len(coordinate) == 2:
+      answer = (lowercase.index(coordinate[0]),(int(coordinate[1])-1))
+      print(answer)
+      return list(answer)
+    else:
+      answer = (lowercase.index(coordinate[0]),(9))
+      print(answer)
+      return list(answer)
+
+  elif coordinate[0] in uppercase:
+    if len(coordinate) == 2:
+      answer = (uppercase.index(coordinate[0]),(int(coordinate[1])-1))
+      print(answer)
+      return list(answer)
+    else:
+      answer = (uppercase.index(coordinate[0]),(9))
+      return list(answer)
+
+
+    
+
+
+    
+  
+
 
 
 if __name__ == "__main__":
