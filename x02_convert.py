@@ -32,8 +32,6 @@ def convert(coordinate):
       else:
         answer = (uppercase.index(coordinate[0]),(int(coordinate[2])-1))
   
-
-  print(answer)
   return list(answer)
 
 

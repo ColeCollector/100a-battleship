@@ -46,7 +46,7 @@ def map(occupied):
  defaultmap = ["..........","..........","..........","..........","..........","..........","..........","..........","..........",".........."]
 
 
- for i in range(0,16):
+ for i in range(0,(len(occupied)-1)):
   coords = occupied[i]
   x = coords[0]
   y = coords[1]
