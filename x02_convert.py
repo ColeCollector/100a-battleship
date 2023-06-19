@@ -10,7 +10,7 @@ def convert(coordinate):
   return value: list containing 2 integers
   """
 
-  lowercase = ["a","b","c","d","e","f","g","h","i","j","k"]
+  lowercase = ["a","b","c","d","e","f","g","h","i","j"]
   uppercase = ["A","B","C","D","E","F","G","H","I","J","K"]
   numbers = ["1","2","3","4","5","6","7","8","9","10","0"]
 
@@ -20,7 +20,7 @@ def convert(coordinate):
     else:
       if coordinate[1] in numbers and coordinate[2] in numbers:
        answer = (lowercase.index(coordinate[0]),(9))
-      else:
+      if (int(coordinate[2])-1) > -1:
         answer = (lowercase.index(coordinate[0]),(int(coordinate[2])-1))
 
   elif coordinate[0] in uppercase:
@@ -29,8 +29,10 @@ def convert(coordinate):
     else:
       if coordinate[1] in numbers and coordinate[2] in numbers:
        answer = (uppercase.index(coordinate[0]),(9))
-      elif str(coordinate[1]) != "0":
-        answer = (uppercase.index(coordinate[0]),(int(coordinate[2])-1))
+      else:
+        if (int(coordinate[2])-1) > -1:
+          answer = (uppercase.index(coordinate[0]),(int(coordinate[2])-1))
+
   
   return list(answer)
 

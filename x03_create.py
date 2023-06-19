@@ -17,47 +17,49 @@ def create():
   print("ex: b3 or A 4")
   time.sleep(0.5)
   occupied = []
+  boat = []
 
   boatsize = [2, 3, 3, 4, 5]
   boats = ["Tugboat", "Submarine", "Destoyer", "Carrier", "Battleship"]
   
   while True:
-    for i in range(0,5):
-      while True:
-        try:
-          time.sleep(0.5)
-          coord = input(f"Where would you like to place your {boats[i]}? ")
-          direction = input("Vertical (v) or Horizontal? (h) ")
-          coord = x02_convert.convert(coord)
-          break
-        except:
-          print("Please enter a valid input")
+      nodupplicate = False
+      for i in range(0,5):
+        while nodupplicate == False:
+          try:
+            time.sleep(0.5)
+            coord = input(f"Where would you like to place your {boats[i]}? ")
+            direction = input("Vertical (v) or Horizontal? (h) ")
+            coord = x02_convert.convert(coord)
+            break
+          except:
+            print("Please enter a valid input")
 
-      oldoccupied = occupied
+          nodupplicate = True
+          for i in range(1,boatsize[i]):
 
-      for i in range(1,boatsize[i]):
+            boat.append((int(coord[0]),int(coord[1])))
+              
+            if direction == "v":
+              newy = int(coord[1]) + i
+              if newy > 10:
+                boat.append((int(coord[0]),newy))
 
-        occupied.append((int(coord[0]),int(coord[1])))
-          
-        if direction == "v":
-          newy = int(coord[1]) + i
-          if newy < 10:
-            occupied.append((int(coord[0]),newy))
+            elif direction == "h":
+              newx = int(coord[0]) + i
+              if newy > 10:
+                boat.append((newx,int(coord[1])))
+          for i in boat:
+            if i in occupied:
+              print("dupe")
+              nodupplicate = False 
+        print("ybrokenadsa")
+        for i in range(0,len(boat)):
+          print("adding")
+          occupied.append(boat[i])
+        print(occupied)
+      break
 
-        elif direction == "h":
-          newx = int(coord[0]) + i
-          if newx < 10:
-            occupied.append((newx,int(coord[1])))
-
-        #checking for duplictes
-        newoccupied = [*set(occupied)] 
-        if (len(newoccupied)) != (len(oldoccupied)+boatsize[i]):
-          occupied = oldoccupied
-          boats.append(boatsize[i])
-          boatsize.append(boatsize[i])
-        
-      print(occupied)
-    break
 
   return occupied
 
@@ -66,3 +68,26 @@ def create():
 x = create()
 print(x)
 x01_map.map(x)
+
+
+"""
+occupied = list of coordinates
+
+add a boat:
+  create list of coordianates for the boat
+  if any of these coordinates are in occupied, make them choose again
+  eg boat = [ [5,3], [5,4], [5,5]]
+
+
+  for 1 boat
+  boatDone = False
+  while boatDone == False
+    boatDone = True
+    boat = generate coordinates
+    for i in boat:
+      if i in occupied:
+        boatDone = False
+  
+  add the boat and append all of its coordinates to occupied
+  
+"""
