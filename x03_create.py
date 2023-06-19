@@ -23,27 +23,39 @@ def create():
   
   while True:
     for i in range(0,5):
-      time.sleep(0.5)
-      coord = input(f"Where would you like to place your {boats[i]}? ")
-      direction = input("Vertical (v) or Horizontal? (h) ")
+      while True:
+        try:
+          time.sleep(0.5)
+          coord = input(f"Where would you like to place your {boats[i]}? ")
+          direction = input("Vertical (v) or Horizontal? (h) ")
+          coord = x02_convert.convert(coord)
+          break
+        except:
+          print("Please enter a valid input")
 
-      try:
-        coord = x02_convert.convert(coord)
-      except:
-        print("Please enter a valid input")
+      oldoccupied = occupied
 
       for i in range(1,boatsize[i]):
+
         occupied.append((int(coord[0]),int(coord[1])))
           
         if direction == "v":
           newy = int(coord[1]) + i
-          occupied.append((int(coord[0]),newy))
+          if newy < 10:
+            occupied.append((int(coord[0]),newy))
 
         elif direction == "h":
           newx = int(coord[0]) + i
-          occupied.append((newx,int(coord[1])))
-        occupied = [*set(occupied)] 
-        occupied.sort()
+          if newx < 10:
+            occupied.append((newx,int(coord[1])))
+
+        #checking for duplictes
+        newoccupied = [*set(occupied)] 
+        if (len(newoccupied)) != (len(oldoccupied)+boatsize[i]):
+          occupied = oldoccupied
+          boats.append(boatsize[i])
+          boatsize.append(boatsize[i])
+        
       print(occupied)
     break
 

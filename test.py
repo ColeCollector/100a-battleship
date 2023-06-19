@@ -32,10 +32,12 @@ def create():
       except:
         print("Please enter a valid input")
 
+      oldoccupied = occupied
+      print(oldoccupied)
+
       for i in range(1,boatsize[i]):
-        oldoccupied = occupied
         occupied.append((int(coord[0]),int(coord[1])))
-          
+
         if direction == "v":
           newy = int(coord[1]) + i
           occupied.append((int(coord[0]),newy))
@@ -43,14 +45,22 @@ def create():
         elif direction == "h":
           newx = int(coord[0]) + i
           occupied.append((newx,int(coord[1])))
-        
-        #checking for duplictes
-        newoccupied = [*set(occupied)] 
-        if len(newoccupied) != (len(occupied)+boatsize[i]):
-          occupied = oldoccupied
-          boats.append(boatsize[i])
-          boatsize.append(boatsize[i])
-
+      
+      print(oldoccupied)
+      #checking for duplictes
+      newoccupied = [*set(occupied)]
+      print("====")
+      print(oldoccupied,occupied,newoccupied)
+      print("=====")
+      print((len(newoccupied)))
+      print((len(oldoccupied)+boatsize[i]))
+      print("=======")
+      if (len(newoccupied)) != (len(oldoccupied)+boatsize[i]):
+        print("dupplicates found")
+        print(occupied,oldoccupied)
+        occupied = oldoccupied
+        boats.append(boatsize[i])
+        boatsize.append(boatsize[i])
         occupied.sort()
       print(occupied)
     break
