@@ -29,7 +29,7 @@ def convert(coordinate):
     else:
       if coordinate[1] in numbers and coordinate[2] in numbers:
        answer = (uppercase.index(coordinate[0]),(9))
-      elif coordinate[2] != 0:
+      elif str(coordinate[1]) != "0":
         answer = (uppercase.index(coordinate[0]),(int(coordinate[2])-1))
   
   return list(answer)
