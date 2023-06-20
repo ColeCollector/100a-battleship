@@ -41,15 +41,14 @@ xx........
 
 def map(occupied):
  #occupied = ([[1, 1], [2, 1], [4, 0], [5, 0], [6, 0], [0, 1], [0, 2], [0, 3], [1, 8], [2, 8], [3, 8], [4, 8], [4, 3], [4, 4], [4, 5], [4, 6], [4, 7]])
- 
 
  defaultmap = ["..........","..........","..........","..........","..........","..........","..........","..........","..........",".........."]
 
 
- for i in range(0,(len(occupied)-1)):
+ for i in range(0,(len(occupied))):
   coords = occupied[i]
   x = coords[0]
-  y = coords[1]
+  y = coords[1]*-1 + 9
 
   line = defaultmap[y]
   lines = [line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9]]
@@ -60,8 +59,11 @@ def map(occupied):
 
   defaultmap.pop(y)
   defaultmap.insert(y,f"{lines[0]}{lines[1]}{lines[2]}{lines[3]}{lines[4]}{lines[5]}{lines[6]}{lines[7]}{lines[8]}{lines[9]}")
-
+  numbers = ["10"," 9"," 8"," 7"," 6"," 5"," 4"," 3"," 2"," 1"]
+  letters = ["j","i","h","g","f","e","d","c","b","a"]
  for i in range(0,10):
-  print(defaultmap[i])
+  print(numbers[i], defaultmap[i])
+ print("  ","abcdefghij")
+
 
 #map(([[1, 1], [2, 1], [4, 0], [5, 0], [6, 0], [0, 1], [0, 2], [0, 3], [1, 8], [2, 8], [3, 8], [4, 8], [4, 3], [4, 4], [4, 5], [4, 6], [4, 7]]))
