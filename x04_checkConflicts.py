@@ -1,10 +1,7 @@
 #!python3
-
 import time
 import x01_map
 import x02_convert
-import x03_create.py
-
 '''
 ##### 4. Check for conflicts
 It is not possible for a boat to occupy the same space as another boat.  
@@ -18,34 +15,72 @@ Check each of your new ship squares to see if there is a conflict
 The two functions that have been created here might be helpful
 '''
 
-def fullList(ships):
-  '''
-  inputs:
-  ships: list of all current/valid ship data
-  
-  return:
-  list of occupied coordinates
-  (example: [ [0,2] , [0,3] , [1,4] , [2,4] , [3,4] ])
-  '''
-  return None
 
-  
-def isConflict(occupied):
-  '''
-  inputs:
-  occupied: list of all occupied squares
-  boat: dictionary with information about your boat you are checking
-  
-  return: 
-  True if the new boat conflicts with existing data
-  False if the new boat does not conflict
-  '''
+def battleship():
+  print("Please give your answer with one letter and a number.\nkeep in mind the boat will go up/right of your starting point. ")
+  print("ex: b3 or A 4\n")
+  time.sleep(0.5)
+  occupied = []
+  boat = []
 
-  for i in range(0,10):
-    x = occupied.count(occupied[i])
-    if x > 1:
-      print(x)
-  return None
+  boatsize = [2, 3, 3, 4, 5]
+  boats = ["Tugboat", "Submarine", "Destoyer", "Carrier", "Battleship"]
   
-x = x03_create.create()
-isConflict(x)
+  while True:
+      for j in range(0,5):
+        nodupplicate = False
+        while nodupplicate == False:
+          while True:
+            boat.clear()
+            try:
+              time.sleep(0.5)
+              coord = input(f"Where would you like to place your {boats[j]}? ")
+              direction = input("Vertical (v) or Horizontal? (h) ")
+              coord = x02_convert.convert(coord)
+              break
+              
+            except:
+              print("Please enter a valid input")
+
+          nodupplicate = True
+
+          boat.append((int(coord[0]),int(coord[1])))
+          for i in range(1,boatsize[j]):
+
+            if direction == "v":
+              newy = int(coord[1]) + i
+              if newy < 10:
+                boat.append((int(coord[0]),newy))
+              else:
+                print("Keep your boat on the map")
+                nodupplicate = False
+                break
+
+            elif direction == "h":
+              newx = int(coord[0]) + i
+              if newx < 10:
+                boat.append((newx,int(coord[1])))
+              else:
+                print("Keep your boat on the map")
+                nodupplicate = False
+                break
+            
+            else:
+              print("Please enter a valid input")
+              nodupplicate = False
+              
+          for n in boat:
+            if n in occupied:
+              print("Your boat is overlapping another boat")
+              nodupplicate = False 
+              break
+            
+        for x in range(0,len(boat)):
+          occupied.append(boat[x])
+        
+        x01_map.map(occupied)
+      break
+  return occupied
+
+battleship()
+
